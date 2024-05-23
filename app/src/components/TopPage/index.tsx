@@ -3,13 +3,13 @@ import { usePostTask } from "../../api/usePostTask";
 import { useDoneTask } from "../../api/useDoneTask";
 import { useResumeTask } from "../../api/useResumeTask";
 import { useDeleteTask } from "../../api/useDeleteTask";
-import { TaskList } from "./Tasklist";
+import { TaskList } from "./TaskList";
 
 export const TopPage = () => {
   const queryTask = useQueryTask();
-  const hookDoneTaskMutate = useDoneTask();
-  const hookResumeTaskMutate = useResumeTask();
-  const hookDeleteTaskMutate = useDeleteTask();
+  const { mutate: useDoneTaskMutate } = useDoneTask();
+  const { mutate: useResumeTaskMutate } = useResumeTask();
+  const { mutate: useDeleteTaskMutate } = useDeleteTask();
 
   function formSubmit() {
     usePostTask();
@@ -17,14 +17,14 @@ export const TopPage = () => {
   }
 
   const finishTask = async (id: string) => {
-    hookDoneTaskMutate.mutate(id);
+    useDoneTaskMutate(id);
   };
   const unfinishTask = async (id: string) => {
-    hookResumeTaskMutate.mutate(id);
+    useResumeTaskMutate(id);
   };
   const deletingTask = async (id: string) => {
     if (!confirm("削除しますか？")) return;
-    hookDeleteTaskMutate.mutate(id);
+    useDeleteTaskMutate(id);
   };
 
   return (

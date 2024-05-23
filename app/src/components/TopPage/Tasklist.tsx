@@ -11,7 +11,7 @@ type Props = {
 
 export const TaskList = ({ id, title, createdAt, finishedAt }: Props) => {
   const queryTask = useQueryTask();
-  const { mutateAsync } = useUpdateTask();
+  const { mutateAsync: useUpdateTaskMutate } = useUpdateTask();
 
   const [isEditing, setIsEditing] = useState(false);
   const onClickTitle = () => setIsEditing(true);
@@ -22,7 +22,7 @@ export const TaskList = ({ id, title, createdAt, finishedAt }: Props) => {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    await mutateAsync({
+    await useUpdateTaskMutate({
       id,
       title: titleValue,
     });
