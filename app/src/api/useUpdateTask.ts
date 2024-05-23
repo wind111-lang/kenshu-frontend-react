@@ -1,5 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
+const BASE_URL = "http://localhost:8000/api";
+
 const updateTitle = ({
   id, 
   title,
@@ -7,7 +9,7 @@ const updateTitle = ({
   id: string;
   title : string;
 }) => 
-  fetch(`http://localhost:8000/api/tasks/${id}`, {
+  fetch(`${BASE_URL}/tasks/${id}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
@@ -18,7 +20,7 @@ const updateTitle = ({
 });
 
 
-export const updateTask = () => {
+export const useUpdateTask = () => {
   const queryClient = useQueryClient();
   
   const mutation = useMutation({
