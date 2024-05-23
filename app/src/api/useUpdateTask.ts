@@ -1,14 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { BASE_URL } from "./const";
 
-const BASE_URL = "http://localhost:8000/api";
-
-const updateTitle = ({
-  id, 
-  title,
-}:{
-  id: string;
-  title : string;
-}) => 
+const updateTitle = ({ id, title }: { id: string; title: string }) =>
   fetch(`${BASE_URL}/tasks/${id}`, {
     method: "PATCH",
     headers: {
@@ -16,15 +9,14 @@ const updateTitle = ({
     },
     body: JSON.stringify({
       title: title,
-    })
-});
-
+    }),
+  });
 
 export const useUpdateTask = () => {
   const queryClient = useQueryClient();
-  
+
   const mutation = useMutation({
-    mutationKey: ["updateTitle"], 
+    mutationKey: ["updateTitle"],
     mutationFn: updateTitle,
     onSuccess: () => {
       queryClient.refetchQueries(["tasks"]);

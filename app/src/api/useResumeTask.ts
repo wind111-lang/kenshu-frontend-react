@@ -1,6 +1,5 @@
 import { useQueryClient, useMutation } from "@tanstack/react-query";
-
-const BASE_URL = "http://localhost:8000/api";
+import { BASE_URL } from "./const";
 
 const setTaskResume = async (id: string) => {
   await fetch(`${BASE_URL}/tasks/${id}`, {
