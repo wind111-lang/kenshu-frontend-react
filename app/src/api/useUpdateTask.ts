@@ -1,7 +1,12 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { BASE_URL } from "./const";
 
-const updateTitle = ({ id, title }: { id: string; title: string }) =>
+type Props = {
+  id: string;
+  title: string;
+};
+
+const updateTitle = ({ id, title }: Props) =>
   fetch(`${BASE_URL}/tasks/${id}`, {
     method: "PATCH",
     headers: {
